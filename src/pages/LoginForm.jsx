@@ -12,11 +12,14 @@ export default function LoginForm() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [rememberMe, setRememberMe] = useState(false)
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false) 
 
+  
   const handleSubmit = async(e) => {
     e.preventDefault()
-    const res= await axiosInstance.post('/users/login',{email,password})
+   try {
+     const res= await axiosInstance.post('/users/login',{email,password})
+    console.log(res)
    if(res.status==200){
     dispatch(updateLogin({login:true,token:res.data.token}))
     if(rememberMe){
@@ -26,6 +29,9 @@ export default function LoginForm() {
       sessionStorage.setItem('authorization',JSON.stringify({token:res.data.token,login:true}))
     }
     
+   }
+   } catch (error) {
+    console.log(error)
    }
   }
 
@@ -89,11 +95,6 @@ export default function LoginForm() {
                 </label>
               </div>
 
-              <div className="text-sm">
-                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                  Forgot password?
-                </a>
-              </div>
             </div>
           </div>
 
@@ -110,39 +111,12 @@ export default function LoginForm() {
         <div className="mt-6">
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300"></div>
+             
             </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">Or continue with</span>
-            </div>
+           
           </div>
 
-          <div className="mt-6 grid grid-cols-4 gap-3">
-            <button
-              type="button"
-              className="w-full inline-flex justify-center py-2.5 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 transition-all duration-150"
-            >
-              <FaGoogle className="text-red-500" />
-            </button>
-            <button
-              type="button"
-              className="w-full inline-flex justify-center py-2.5 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 transition-all duration-150"
-            >
-              <FaFacebook className="text-blue-600" />
-            </button>
-            <button
-              type="button"
-              className="w-full inline-flex justify-center py-2.5 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 transition-all duration-150"
-            >
-              <FaTwitter className="text-blue-400" />
-            </button>
-            <button
-              type="button"
-              className="w-full inline-flex justify-center py-2.5 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 transition-all duration-150"
-            >
-              <FaGithub className="text-gray-900" />
-            </button>
-          </div>
+         
         </div>
 
         <div className="text-center mt-4">

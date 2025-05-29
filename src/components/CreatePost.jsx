@@ -10,7 +10,7 @@ export default function CreatePost() {
   const [inputValue, setinputValue] = useState('');
   const [emojiPicker, setemojiPicker] = useState(false);
   const userSlice= useSelector((state)=>state.user)
-  const [UploadPercent, setUploadPercent] = useState();
+
 
   const handleInput=(e)=>{
     const text= e.target.value

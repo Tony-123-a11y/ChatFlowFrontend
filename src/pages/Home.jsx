@@ -1,25 +1,21 @@
+import React from 'react'
+import Feed from '../components/Feed'
+import TrendingSidebar from '../components/TrendingSideBar'
 
-import { useSelector } from "react-redux"
-import Feed from "../components/Feed"
-import TrendingSidebar from "../components/TrendingSideBar"
-
-export default function Homepage() {
-  const {login}= useSelector((state)=>state.user)
+const Home = () => {
   return (
-    <div className="bg-gray-50 min-h-screen dark  dark:text-white w-5/6 ml-auto ">
-   
-      <div className="container mx-auto px-4 justify-between py-6 flex gap-6">
-      
-        {/* Main Content - Feed */}
-        <div className=" flex-grow">
-          <Feed />
+    <div className='grid grid-cols-6 gap-6 max-xl:gap-4'>
+      {/* Main Content - Feed */}
+        <div className="col-span-4 max-lg:col-span-6 max-md:block border-black">
+          <Feed/>
         </div>
 
         {/* Right Sidebar - Trending */}
-        <div className="hidden xl:block w-80 flex-shrink-0">
+        <div className="col-span-2 max-lg:hidden"> 
           <TrendingSidebar />
         </div>
-      </div>
     </div>
   )
 }
+
+export default Home

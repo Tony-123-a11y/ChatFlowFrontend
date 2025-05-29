@@ -1,52 +1,46 @@
 import { Home, User, Users, Bookmark, Settings,  LogOut } from "lucide-react"
 import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import { updateChatting, updateLogin } from "../Features/UserSlice"
 import { useState } from "react"
 
 export default function SideBarNavigation() {
   const dispatch=useDispatch()
-  const page= JSON.parse(localStorage.getItem('page')) || 0
-  const [active, setactive] = useState(page);
   const {login,chatting,user}= useSelector((state)=>state.user)
 
   const menuItems = [
-    { icon: <Home className="h-6 w-6" />, label: "Home" ,path:'/',chat:false},
-    { icon: <User className="h-6 w-6" />, label: "Profile" ,path:'/profile',chat:false},
-    { icon: <Users className="h-6 w-6" />, label: "Chats",path:'/chats',chat:true },
-    { icon: <Bookmark className="h-6 w-6" />, label: "Saved" ,path:'/saved',chat:false},
-    { icon: <Settings className="h-6 w-6" />, label: "Settings",path:'',chat:false },
+    { icon: <Home size={22} />, label: "Home" ,path:'/'},
+    { icon: <User size={22} />, label: "Profile" ,path:'/profile'},
+    { icon: <Users size={22} />, label: "Chats",path:'/chats',chat:true },
+    { icon: <Bookmark size={22} />, label: "Saved" ,path:'/saved'},
+   
    
   ]
+   const linkClasses = ({ isActive }) =>
+  `flex items-center gap-3 px-4 py-3  rounded-lg  ${
+              isActive
+                ? "bg-gradient-to-r from-purple-50 to-blue-50 text-purple-600 font-medium"
+                : "text-gray-700 hover:bg-gray-50"
+            }`;
 
   return (
-    <div className={`h-screen  bg-gray-50 fixed px-2 py-6 ${chatting ? 'w-1/15' : 'w-1/6'}  w-1/6 top-16 `}>
-    <div className=" rounded-xl  bg-white shadow-sm  p-4">
+    <div className={` bg-gray-50 sticky  top-22 `}>
+    <div className=" rounded-xl  bg-white shadow-sm p-2">
       <nav className="space-y-1 ">
         {menuItems.map((item, index) => (
-          <button key={item.label} className="w-full " onClick={()=> {
-            dispatch(updateChatting(item.chat))
-            localStorage.setItem('page',index)
-            setactive(index)
-            }}>
-          <Link
+          <NavLink 
             key={index}
            to={item.path}
            state={user?._id}
-            className={`flex items-center gap-3 px-4 py-3 rounded-lg  ${
-              index==active
-                ? "bg-gradient-to-r from-purple-50 to-blue-50 text-purple-600 font-medium"
-                : "text-gray-700 hover:bg-gray-50"
-            }`}
-          >
-            {item.icon}
+            className={linkClasses}
+           >
+             {item.icon}
             {
-              (!chatting &&  <span className="max-xl:hidden">{item.label}</span>)
+              (!chatting &&  <span className="">{item.label}</span>)
             }
            
             
-          </Link>
-          </button>
+          </NavLink>
         ))}
       </nav>
 
@@ -62,9 +56,9 @@ export default function SideBarNavigation() {
       }}
       className="flex w-full cursor-pointer items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
     >
-      <LogOut className="h-6 w-6" />
+      <LogOut size={26} />
       {
-              (!chatting &&   <span>Logout</span>)
+              (!chatting &&   <span className="">Logout</span>)
             }
      
     </button>

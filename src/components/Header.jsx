@@ -16,12 +16,10 @@ export default function Header() {
   }
   return (
     <header className="bg-white shadow-sm sticky top-0 z-100">
-      <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+      <div className=" mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
         <Link to={'/'} className="flex items-center gap-2">
-          <button className="lg:hidden mr-2">
-            <Menu className="h-6 w-6 text-gray-600" />
-          </button>
+         
          <div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center">
            <img src={logo} alt="" />
          </div>
@@ -55,19 +53,17 @@ export default function Header() {
 
         {/* User Actions */}
         <div className="flex items-center gap-4">
-          <button className="p-2 rounded-full hover:bg-gray-100 cursor-pointer transition">
-            <Bell className="h-6 w-6 text-gray-600" />
-          </button>
-          <button className="p-2 rounded-full hover:bg-gray-100 cursor-pointer transition">
+         
+          <Link to={'/chats'} className="p-2 rounded-full hover:bg-gray-100 cursor-pointer  transition">
             <MessageSquare className="h-6 w-6 text-gray-600" />
-          </button>
-          <div className="flex items-center cursor-pointer transition">
+          </Link>
+          <Link to={'/profile'} state={user?._id} className="flex items-center cursor-pointer transition">
             <img
               src={user?.profilePic}
               alt="Profile"
               className="h-10 w-10 rounded-full border-2 border-purple-500 object-cover object-center"
             />
-          </div>
+          </Link>
         </div>
       </div>
     </header>

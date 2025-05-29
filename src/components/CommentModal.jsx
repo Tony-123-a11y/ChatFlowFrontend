@@ -5,7 +5,7 @@ import { X } from "lucide-react"
 import CommentItem from "./CommentItem"
 import CommentForm from "./CommentForm"
 
-export default function CommentModal({ isOpen, post, setIsOpen, getAllPosts }) {
+export default function CommentModal({ isOpen, post, setIsOpen, getAllPosts,getDetails }) {
   const [comments, setComments] = useState([])
   const modalRef = useRef(null)
 console.log(post)
@@ -71,7 +71,7 @@ console.log(post)
 
         {/* Add Comment Form */}
         <div className="px-4">
-          <CommentForm  placeholder="Write a comment..." post={post}  getAllPosts={getAllPosts}/>
+          <CommentForm  placeholder="Write a comment..." post={post}  getAllPosts={getAllPosts} getDetails={getDetails}/>
         </div>
       </div>
     </div>

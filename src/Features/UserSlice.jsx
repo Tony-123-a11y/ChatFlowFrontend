@@ -12,7 +12,6 @@ const initialState = {
   login: authKey?authKey.login:false || authKeySession?authKeySession.login:false,
   token: authKey?authKey.token:'' || authKeySession?authKeySession.token:'',
   loader:false,
-  chatting:false,
 }
 
 export const userSlice = createSlice({

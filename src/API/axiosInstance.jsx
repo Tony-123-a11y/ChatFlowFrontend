@@ -39,7 +39,7 @@ const authKeySession= JSON.parse(sessionStorage.getItem('authorization'))
     // Do something with response data
     return response;
   }, function (error) {
-    console.log(error)
+    // console.log(error)
     if(error.response.data.msg='msg expired'){
       toast.dismiss()
       toast.error('You were logged out!',{

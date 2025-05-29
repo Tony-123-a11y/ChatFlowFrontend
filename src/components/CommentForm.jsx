@@ -5,26 +5,20 @@ import { Send } from "lucide-react"
 import axiosInstance from "../API/axiosInstance"
 import { toast } from "react-toastify"
 
-export default function CommentForm({ onSubmit, autoFocus = false ,post,getAllPosts}) {
+export default function CommentForm({ onSubmit, autoFocus = false ,post,getAllPosts,getDetails}) {
   const [comment, setComment] = useState("")
   const inputRef = useRef(null)
-
+console.log(post)
   useEffect(() => {
     if (autoFocus && textareaRef.current) {
       inputRef.current.focus()
     }
   }, [autoFocus])
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault()
-  //   if (comment.trim()) {
-  //     onSubmit(comment)
-  //     setComment("")
-  //   }
-  // }
+  
   const handlePostSubmit =async (e)=>{
       e.preventDefault()
-        // let value = inputRef.current.value;
+     
         try {
            let response = await axiosInstance.patch(`/posts/comment/${post._id}`,{
             text:comment
@@ -36,6 +30,7 @@ export default function CommentForm({ onSubmit, autoFocus = false ,post,getAllPo
            
             setComment("")
              getAllPosts()
+             getDetails()
         }
         } catch (error) {
           console.log(error)
